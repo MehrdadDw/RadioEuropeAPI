@@ -1,9 +1,9 @@
 using System;
 using System.Text;
 
-namespace RadioEurope.Helpers
+namespace RadioEurope.Utilities
 {
-    public static class ExtensionMethods
+    public static class EncodingExtensions
     {
         public static string EncodeBase64(this string value)
         {
