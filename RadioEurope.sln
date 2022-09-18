@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioEurope.API", "RadioEurope.API\RadioEurope.API.csproj", "{52DDAAFD-EDA7-47DB-9271-EF2A08B8020A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioEurope.UnitTests", "RadioEurope.UnitTests\RadioEurope.UnitTests.csproj", "{898E6718-2EF5-46EE-A440-9FA9EB75EB2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52DDAAFD-EDA7-47DB-9271-EF2A08B8020A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DDAAFD-EDA7-47DB-9271-EF2A08B8020A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DDAAFD-EDA7-47DB-9271-EF2A08B8020A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DDAAFD-EDA7-47DB-9271-EF2A08B8020A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898E6718-2EF5-46EE-A440-9FA9EB75EB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898E6718-2EF5-46EE-A440-9FA9EB75EB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898E6718-2EF5-46EE-A440-9FA9EB75EB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898E6718-2EF5-46EE-A440-9FA9EB75EB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

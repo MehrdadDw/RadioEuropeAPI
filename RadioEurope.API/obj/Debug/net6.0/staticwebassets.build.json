@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JXqIxX4luu8KxksYxxE2PdHjtYf0HnqsHbX8PJsNLyU=",
+  "Source": "RadioEurope.API",
+  "BasePath": "_content/RadioEurope.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
