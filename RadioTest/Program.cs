@@ -90,7 +90,7 @@ Console.WriteLine( $"http://{host}/v1/diff/{ID}/left");
     {
         Random rnd = new Random();
         List<char> res = new List<char>();
-        string refrence = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+        string refrence = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var refrence_cahrs = refrence.ToCharArray();
         for (int i = 0; i < length; i++)
         {

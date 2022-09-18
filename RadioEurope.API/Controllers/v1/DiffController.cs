@@ -42,6 +42,8 @@ public class DiffController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> diff(string ID)
     {
+          try
+    {
         var res = _diffService.CalculateDiff(ID);
         switch (res.Message)
         {
@@ -49,7 +51,7 @@ public class DiffController : ControllerBase
                 return Ok(new { message = "Inputs were equal.", data = res.Data });
                 break;
             case DiffMessage.KeyNotFound:
-                return Ok(new { message = "Couldn't find the ID.", data = res.Data });
+                return NotFound(new { message = "Couldn't find the ID.", data = res.Data });
                 break;
             case DiffMessage.LengthsNotEqual:
                 return Ok(new { message = "Inputs are of different size.", data = res.Data });
@@ -61,5 +63,12 @@ public class DiffController : ControllerBase
                 return Ok(new { message = "", data = res.Data });
                 break;
         }
+    }
+    catch (Exception)
+    {
+       
+            throw;
+    }
+       
     }
 }
