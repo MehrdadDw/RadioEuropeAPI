@@ -5,7 +5,7 @@ public interface IRedisService
 
 {
     void Write(LeftRightDiff LRD);
-    LeftRightDiff ReadLRD(string ID);
+    LeftRightDiff? ReadLRD(string ID);
 }
 
 public class RedisService : IRedisService
@@ -21,7 +21,7 @@ public class RedisService : IRedisService
     {
         if (multiplexer == null)
         {
-            return;
+            return ;
         }
         var database = multiplexer.GetDatabase(1);
         var LRD1 = ReadLRD(LRD.ID);
@@ -31,7 +31,7 @@ public class RedisService : IRedisService
         {
             left = LRD.Left;
         }
-        else if (!string.IsNullOrEmpty(LRD1.Left))
+        else if (!string.IsNullOrEmpty(LRD1?.Left))
         {
             left = LRD1.Left;
         }
@@ -40,13 +40,13 @@ public class RedisService : IRedisService
         {
             right = LRD.Right;
         }
-        else if (!string.IsNullOrEmpty(LRD1.Right))
+        else if (!string.IsNullOrEmpty(LRD1?.Right))
         {
             right = LRD1.Right;
         }
         database.HashSet(LRD.ID, new HashEntry[] { new HashEntry("Left", left), new HashEntry("Right", right) });     
     }
-    public LeftRightDiff ReadLRD(string ID)
+    public LeftRightDiff? ReadLRD(string ID)
     {
         var database = multiplexer.GetDatabase(1);
         if ( database.KeyExists(ID)){
@@ -56,8 +56,6 @@ public class RedisService : IRedisService
           Left = retreivedLeft
         ,Right = retreivedRight };
         }
-        return new LeftRightDiff { ID = ID,
-          Left = " "
-        ,Right = " " };
+        return null;
     }
 }

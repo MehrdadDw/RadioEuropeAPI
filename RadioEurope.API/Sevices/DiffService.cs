@@ -1,11 +1,12 @@
 using StackExchange.Redis;
 using RadioEurope.API.Models;
+using RadioEurope.API.Models.Enums;
 namespace RadioEurope.API.Services;
 public interface IDiffService
 
 {
     LeftRightDiff RetrieveLRD(string ID);
-    List<OffsetLength> CalculateDiff(string ID);
+    CalculateResult CalculateDiff(string ID);
 }
 
 public class DiffService : IDiffService
@@ -21,10 +22,20 @@ public class DiffService : IDiffService
     {
         return _redisService.ReadLRD(ID);
     }
-    public List<OffsetLength> CalculateDiff(string ID)
+    public CalculateResult CalculateDiff(string ID)
     {
-        var LRD=RetrieveLRD(ID);
         var result = new List<OffsetLength>();
+        var LRD=RetrieveLRD(ID);
+        //todo not found
+        if (LRD==null){
+        return new CalculateResult{ Message=DiffMessage.KeyNotFound,Data= result};
+        }
+        if (LRD.Left==LRD.Right){
+            return new CalculateResult{ Message= DiffMessage.Equal,Data= result};
+        }
+        if (LRD.Left.Length!=LRD.Right.Length){
+            return new CalculateResult{ Message= DiffMessage.LengthsNotEqual,Data= result};
+        }
         var offset = 0;
         var lenght = 0;
         for (int i = 0; i < LRD.Left.Length; i++)
@@ -36,7 +47,6 @@ public class DiffService : IDiffService
                     offset = i;
                 }
                 lenght++;
-
             }
             else
             {
@@ -45,7 +55,6 @@ public class DiffService : IDiffService
                     result.Add(new OffsetLength { offset = offset, length = lenght });
                     lenght = 0;
                 }
-
             }
 
         }
@@ -53,7 +62,7 @@ public class DiffService : IDiffService
             {
                 result.Add(new OffsetLength { offset = offset, length = lenght });
             }
-        return result;
+        return new CalculateResult{ Message= DiffMessage.Success,Data= result};
     }
 
 }
