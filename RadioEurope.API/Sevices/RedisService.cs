@@ -17,42 +17,42 @@ public class RedisService : IRedisService
         this.multiplexer = multiplexer;
     }
 
-    public void Write(LeftRightDiff LRD)
+    public void Write(LeftRightDiff Lrd)
     {
         if (multiplexer == null)
         {
             return ;
         }
         var database = multiplexer.GetDatabase(1);
-        var LRD1 = ReadLRD(LRD.ID);
+        var lrd1 = ReadLRD(Lrd.ID);
         var left = " ";
         var right = " ";
-        if (LRD.Left != " ")
+        if (Lrd.Left != " ")
         {
-            left = LRD.Left;
+            left = Lrd.Left;
         }
-        else if (!string.IsNullOrEmpty(LRD1?.Left))
+        else if (!string.IsNullOrEmpty(lrd1?.Left))
         {
-            left = LRD1.Left;
+            left = lrd1.Left;
         }
 
-        if (LRD.Right != " ")
+        if (Lrd.Right != " ")
         {
-            right = LRD.Right;
+            right = Lrd.Right;
         }
-        else if (!string.IsNullOrEmpty(LRD1?.Right))
+        else if (!string.IsNullOrEmpty(lrd1?.Right))
         {
-            right = LRD1.Right;
+            right = lrd1.Right;
         }
-        database.HashSet(LRD.ID, new HashEntry[] { new HashEntry("Left", left), new HashEntry("Right", right) });     
+        database.HashSet(Lrd.ID, new HashEntry[] { new HashEntry("Left", left), new HashEntry("Right", right) });     
     }
-    public LeftRightDiff? ReadLRD(string ID)
+    public LeftRightDiff? ReadLRD(string Id)
     {
         var database = multiplexer.GetDatabase(1);
-        if ( database.KeyExists(ID)){
-        var retreivedLeft = database.HashGetAll(ID)[0].Value;
-        var retreivedRight = database.HashGetAll(ID)[1].Value;
-        return new LeftRightDiff { ID = ID,
+        if ( database.KeyExists(Id)){
+        var retreivedLeft = database.HashGetAll(Id)[0].Value;
+        var retreivedRight = database.HashGetAll(Id)[1].Value;
+        return new LeftRightDiff { ID = Id,
           Left = retreivedLeft
         ,Right = retreivedRight };
         }

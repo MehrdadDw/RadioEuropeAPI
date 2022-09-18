@@ -24,7 +24,7 @@ public class EncodingTests
             Assert.Equal(result,expected);
 
     }
-        [Theory]
+    [Theory]
     [InlineData( "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9","{\"input\":\"testValue\"}")]
     [InlineData( "c29tZSB2YWx1ZQ==","some value")]
 
