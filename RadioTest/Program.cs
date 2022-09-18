@@ -56,7 +56,10 @@ class Program
             timer.Stop();
 
         }
+        Console.WriteLine();
+        Console.WriteLine($"-----------------------------------------------");
         Console.WriteLine($"---------------------Results-------------------");
+        Console.WriteLine($"-----------------------------------------------");
         Console.WriteLine($"took {timer.ElapsedMilliseconds / number} milliseconds per left+right+diff API calls.");
         Console.WriteLine($"{timer.ElapsedMilliseconds} milliseconds total reqs");
 
