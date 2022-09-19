@@ -18,11 +18,11 @@ public class Services
 
         //Arrange
         IConnectionMultiplexer multiplexer = null;
-        var mockRedisService = new Mock<RedisService>(multiplexer).As<IRedisService>();
-        mockRedisService.CallBase = true;
-        mockRedisService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
         .Returns(new LeftRightDiff { Left = l, Right = r, ID = "id1" });
-        var mockDiffService = new Mock<DiffService>(mockRedisService.Object).As<IDiffService>();
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
         mockDiffService.CallBase = true;
         //Act
         var DiffResult = mockDiffService.Object.CalculateDiff("id1");
@@ -38,11 +38,11 @@ public class Services
     {
         //Arrange
         IConnectionMultiplexer multiplexer = null;
-        var mockRedisService = new Mock<RedisService>(multiplexer).As<IRedisService>();
-        mockRedisService.CallBase = true;
-        mockRedisService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
         .Returns(new LeftRightDiff { Left = "QSqyA TgMFshQ", Right = "QSqyA TgMFshQ", ID = "id1" });
-        var mockDiffService = new Mock<DiffService>(mockRedisService.Object).As<IDiffService>();
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
         mockDiffService.CallBase = true;
         //Act
         var DiffResult = mockDiffService.Object.CalculateDiff("id1");
@@ -54,11 +54,11 @@ public class Services
     {
         //Arrange
         IConnectionMultiplexer multiplexer = null;
-        var mockRedisService = new Mock<RedisService>(multiplexer).As<IRedisService>();
-        mockRedisService.CallBase = true;
-        mockRedisService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
         .Returns(new LeftRightDiff { Left = "QSqyA TgMFshQ", Right = "QSxxxxxxqyA TgMFshQ", ID = "id1" });
-        var mockDiffService = new Mock<DiffService>(mockRedisService.Object).As<IDiffService>();
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
         mockDiffService.CallBase = true;
         //Act
         var DiffResult = mockDiffService.Object.CalculateDiff("id1");
@@ -70,11 +70,11 @@ public class Services
     {
         //Arrange
         IConnectionMultiplexer multiplexer = null;
-        var mockRedisService = new Mock<RedisService>(multiplexer).As<IRedisService>();
-        mockRedisService.CallBase = true;
-        mockRedisService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
         .Returns((LeftRightDiff)null);
-        var mockDiffService = new Mock<DiffService>(mockRedisService.Object).As<IDiffService>();
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
         mockDiffService.CallBase = true;
         //Act
         var DiffResult = mockDiffService.Object.CalculateDiff("id1");

@@ -32,9 +32,9 @@ void ConfigureServices(IServiceCollection services){
     services.AddTransient<IConnectionMultiplexer>
     (x=>ConnectionMultiplexer.Connect("localhost"));
     
-    services.AddTransient<IRedisService>
-    (x=>new RedisService(x.GetRequiredService<IConnectionMultiplexer>()));
+    services.AddTransient<IDataService>
+    (x=>new DataService(x.GetRequiredService<IConnectionMultiplexer>()));
 
     services.AddTransient<IDiffService>
-    (x=>new DiffService(x.GetRequiredService<IRedisService>()));
+    (x=>new DiffService(x.GetRequiredService<IDataService>()));
 }

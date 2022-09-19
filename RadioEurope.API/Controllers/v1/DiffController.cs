@@ -10,12 +10,12 @@ namespace RadioEurope.API.Controllers.v1;
 public class DiffController : ControllerBase
 {
     private readonly ILogger<DiffController> _logger;
-    private readonly IRedisService _redisService;
+    private readonly IDataService _DataService;
     private readonly IDiffService _diffService;
 
-    public DiffController(ILogger<DiffController> logger, IRedisService redisService, IDiffService diffService)
+    public DiffController(ILogger<DiffController> logger, IDataService DataService, IDiffService diffService)
     {
-        _redisService = redisService;
+        _DataService = DataService;
         _diffService = diffService;
         _logger = logger;
     }
@@ -27,7 +27,7 @@ public class DiffController : ControllerBase
     {
         try
         {
-            _redisService.Write(new LeftRightDiff { Left = input, Right = " ", ID = ID });
+            _DataService.Write(new LeftRightDiff { Left = input, Right = " ", ID = ID });
             return Ok();
         }
         catch (Exception ex)
@@ -44,7 +44,7 @@ public class DiffController : ControllerBase
     {
         try
         {
-            _redisService.Write(new LeftRightDiff { Left = " ", Right = input, ID = ID });
+            _DataService.Write(new LeftRightDiff { Left = " ", Right = input, ID = ID });
             return Ok();
         }
         catch (Exception ex)

@@ -11,16 +11,16 @@ public interface IDiffService
 
 public class DiffService : IDiffService
 {
-    private readonly IRedisService _redisService;
+    private readonly IDataService _DataService;
 
-    public DiffService(IRedisService redisService)
+    public DiffService(IDataService DataService)
     {
-        _redisService = redisService;
+        _DataService = DataService;
 
     }
     public LeftRightDiff RetrieveLRD(string ID)
     {
-        return _redisService.ReadLRD(ID);
+        return _DataService.ReadLRD(ID);
     }
     public CalculateResult CalculateDiff(string ID)
     {

@@ -1,18 +1,18 @@
 using StackExchange.Redis;
 using RadioEurope.API.Models;
 namespace RadioEurope.API.Services;
-public interface IRedisService
+public interface IDataService
 
 {
     void Write(LeftRightDiff LRD);
     LeftRightDiff? ReadLRD(string ID);
 }
 
-public class RedisService : IRedisService
+public class DataService : IDataService
 {
     private readonly IConnectionMultiplexer? multiplexer;
 
-    public RedisService(IConnectionMultiplexer multiplexer)
+    public DataService(IConnectionMultiplexer multiplexer)
     {
         this.multiplexer = multiplexer;
     }
