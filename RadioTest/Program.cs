@@ -125,7 +125,7 @@ class Program
         }
         var string1 = $"{{\"input\":\"{string.Join("", st1)}\"}}";
         var string2 = $"{{\"input\":\"{string.Join("", st2)}\"}}";
-        var string3 = $"{{\"input\":\"{string.Join("", st3)}\"}}";
+        var string3 = $"{{\"diffs\":\"{string.Join("", st3)}\"}}";
         Console.WriteLine($"{string1}\n{string2}\n{string3}");
 
         return (EncodeBase64(string1),

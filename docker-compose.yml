@@ -1,0 +1,23 @@
+version: "3.0"
+services:
+    redis:
+        container_name: redis-container
+        image: redis:latest
+        networks:
+            - radio-net
+        expose:
+            - "6379"  
+    radio-api:
+        container_name: radio-container
+        build:
+            context: ./
+        image: radio-api:latest
+        networks:
+            - radio-net
+        depends_on:
+            - redis
+        ports:
+            - 8083:8083
+networks:
+    radio-net:
+        driver: bridge

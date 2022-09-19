@@ -125,3 +125,4 @@
 /home/mehrdad/Desktop/RadioEurope/RadioEurope.UnitTests/bin/Debug/net6.0/RadioEurope.API.pdb
 /home/mehrdad/Desktop/RadioEurope/RadioEurope.UnitTests/bin/Debug/net6.0/Castle.Core.dll
 /home/mehrdad/Desktop/RadioEurope/RadioEurope.UnitTests/bin/Debug/net6.0/Moq.dll
+/home/mehrdad/Desktop/RadioEurope/RadioEurope.UnitTests/bin/Debug/net6.0/Swashbuckle.AspNetCore.Annotations.dll

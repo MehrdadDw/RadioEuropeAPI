@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "py2nO1qmWqwI3++v4qEybv2/jMwP/BIHaGfo0mBgdPaqZ5D5WF/RYCbWm6HkS56FX7+FFYZgGJnXr5ZL60Tpjg==",
+  "dgSpecHash": "TFLr3tsbogbkOshgrwm/yXiBlWjllVTMAxhEhOYU+ZEK4ivnb8sAUDPicxOwAhVf45P+7rLGyq3bA4ip6xoq/g==",
   "success": true,
   "projectFilePath": "/home/mehrdad/Desktop/RadioEurope/RadioEurope.UnitTests/RadioEurope.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -41,8 +41,9 @@
     "/home/mehrdad/.nuget/packages/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/stackexchange.redis/2.6.66/stackexchange.redis.2.6.66.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
-    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
-    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.annotations/6.4.0/swashbuckle.aspnetcore.annotations.6.4.0.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/system.buffers/4.3.0/system.buffers.4.3.0.nupkg.sha512",

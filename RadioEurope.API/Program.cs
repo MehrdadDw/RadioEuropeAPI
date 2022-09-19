@@ -35,7 +35,7 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<IConnectionMultiplexer>
-    (x => ConnectionMultiplexer.Connect("localhost"));
+    (x => ConnectionMultiplexer.Connect("redis"));
 
     services.AddTransient<IDataService>
     (x => new DataService(x.GetRequiredService<IConnectionMultiplexer>()));
