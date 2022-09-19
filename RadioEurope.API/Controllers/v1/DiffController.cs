@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using StackExchange.Redis;
 using RadioEurope.API.Services;
 using RadioEurope.API.Binders;
 using RadioEurope.API.Models;
 using RadioEurope.API.Models.Enums;
+using Swashbuckle.AspNetCore.Annotations;
 namespace RadioEurope.API.Controllers.v1;
 [ApiController]
 [Route("v1/diff/")]
@@ -18,12 +18,16 @@ public class DiffController : ControllerBase
         _DataService = DataService;
         _diffService = diffService;
         _logger = logger;
-    }
-
-    [Route("{ID}/left")]
+    }[Route("{ID}/left")]
+    [SwaggerOperation(Summary = "Receives the value of Left element by ID.")]
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [Consumes("application/custom")]
-    public async Task<IActionResult> left(string ID, [FromBody][ModelBinder(typeof(CustomBinder))] string input = "\\\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\\\"")
+    public async Task<IActionResult> left(
+     [SwaggerParameter("The ID of the element", Required = true)] string ID,
+     [SwaggerParameter("The Base64 encoded Left value of element.", Required = true)]
+    [FromBody][ModelBinder(typeof(CustomBinder))] string input = "\\\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\\\"")
     {
         try
         {
@@ -38,9 +42,15 @@ public class DiffController : ControllerBase
     }
 
     [Route("{ID}/right")]
+    [SwaggerOperation(Summary = "Receives the value of Right element by ID.")]
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [Consumes("application/custom")]
-    public async Task<IActionResult> right(string ID, [FromBody][ModelBinder(typeof(CustomBinder))] string input = "\\\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\\\"")
+    public async Task<IActionResult> right(
+    [SwaggerParameter("The ID of the element", Required = true)] string ID,
+     [SwaggerParameter("The Base64 encoded Right value of element.", Required = true)]
+      [FromBody][ModelBinder(typeof(CustomBinder))] string input = "\\\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\\\"")
     {
         try
         {
@@ -55,8 +65,13 @@ public class DiffController : ControllerBase
     }
 
     [Route("{ID}")]
+    [SwaggerOperation(Summary = "Differentiates the value of Right and Left elements by ID and returns the result.")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<OffsetLength>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]
-    public async Task<IActionResult> diff(string ID)
+    public async Task<IActionResult> diff(
+        [SwaggerParameter("The ID of the element", Required = true)] string ID)
     {
         try
         {

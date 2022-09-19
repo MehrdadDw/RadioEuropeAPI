@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wrsmCVaKUq1jWSTQplyVtki4cxe15odQcReiyPEP+QqG9URnZU284XM0LyXjkidyt7xn9qcTuhtwxNTElZeC1Q==",
+  "dgSpecHash": "ktfjC6yieUuwHgNybGgtRQO8gXDRUxzoBSh/RppGWA6naDpV29pX8xHww2Aiy8CYOPRJ1ndKCdEz2yM2fBg3tg==",
   "success": true,
   "projectFilePath": "/home/mehrdad/Desktop/RadioEurope/RadioEurope.API/RadioEurope.API.csproj",
   "expectedPackageFiles": [
@@ -12,8 +12,9 @@
     "/home/mehrdad/.nuget/packages/pipelines.sockets.unofficial/2.2.2/pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/stackexchange.redis/2.6.66/stackexchange.redis.2.6.66.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
-    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
-    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.annotations/6.4.0/swashbuckle.aspnetcore.annotations.6.4.0.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/system.configuration.configurationmanager/5.0.0/system.configuration.configurationmanager.5.0.0.nupkg.sha512",
     "/home/mehrdad/.nuget/packages/system.diagnostics.performancecounter/5.0.0/system.diagnostics.performancecounter.5.0.0.nupkg.sha512",
