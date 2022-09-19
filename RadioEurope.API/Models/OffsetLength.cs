@@ -3,7 +3,7 @@ public class OffsetLength: IEquatable<OffsetLength>{
     public int offset {get; set;}
     public int length {get; set;}
 
-    public bool Equals(OffsetLength other)
+    public bool Equals(OffsetLength? other)
     {
         if (other == null)
             return false;

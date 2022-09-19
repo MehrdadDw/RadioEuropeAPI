@@ -18,26 +18,27 @@ public class DiffController : ControllerBase
         _DataService = DataService;
         _diffService = diffService;
         _logger = logger;
-    }[Route("{ID}/left")]
+    }
+    [Route("{ID}/left")]
     [SwaggerOperation(Summary = "Receives the value of Left element by ID.")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [Consumes("application/custom")]
     public async Task<IActionResult> left(
-     [SwaggerParameter("The ID of the element", Required = true)] string ID,
-     [SwaggerParameter("The Base64 encoded Left value of element.", Required = true)]
+    [SwaggerParameter("The ID of the element", Required = true)] string ID,
+    [SwaggerParameter("The Base64 encoded Left value of element.", Required = true)]
     [FromBody][ModelBinder(typeof(CustomBinder))] string input = "\\\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\\\"")
     {
         try
         {
-            _DataService.Write(new LeftRightDiff { Left = input, Right = " ", ID = ID });
+            await _DataService.Write(new LeftRightDiff { Left = input, Right = " ", ID = ID });
             return Ok();
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error during {nameof(left)} call",ex);
-            throw ex;
+            _logger.LogError($"Error during {nameof(left)} call", ex);
+            throw;
         }
     }
 
@@ -54,13 +55,13 @@ public class DiffController : ControllerBase
     {
         try
         {
-            _DataService.Write(new LeftRightDiff { Left = " ", Right = input, ID = ID });
+            await _DataService.Write(new LeftRightDiff { Left = " ", Right = input, ID = ID });
             return Ok();
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error during {nameof(right)} call",ex);
-            throw ex;
+            _logger.LogError($"Error during {nameof(right)} call", ex);
+            throw;
         }
     }
 
@@ -75,30 +76,25 @@ public class DiffController : ControllerBase
     {
         try
         {
-            var res = _diffService.CalculateDiff(ID);
+            var res = await _diffService.CalculateDiff(ID);
             switch (res.Message)
             {
                 case DiffMessage.Equal:
                     return Ok(new { message = "Inputs were equal.", data = res.Data });
-                    break;
                 case DiffMessage.KeyNotFound:
                     return NotFound(new { message = "Couldn't find the ID.", data = res.Data });
-                    break;
                 case DiffMessage.LengthsNotEqual:
                     return Ok(new { message = "Inputs are of different size.", data = res.Data });
-                    break;
                 case DiffMessage.Success:
                     return Ok(new { message = "Success", data = res.Data });
-                    break;
                 default:
                     return Ok(new { message = "", data = res.Data });
-                    break;
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error during {nameof(diff)} call",ex);
-            throw ex;
+            _logger.LogError($"Error during {nameof(diff)} call", ex);
+            throw;
         }
 
     }

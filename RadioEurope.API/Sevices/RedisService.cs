@@ -4,27 +4,28 @@ namespace RadioEurope.API.Services;
 public interface IDataService
 
 {
-    void Write(LeftRightDiff LRD);
-    LeftRightDiff? ReadLRD(string ID);
+    Task Write(LeftRightDiff LRD);
+    Task<LeftRightDiff?> ReadLRD(string ID);
 }
 
 public class DataService : IDataService
 {
-    private readonly IConnectionMultiplexer? multiplexer;
+    private readonly IConnectionMultiplexer multiplexer;
 
     public DataService(IConnectionMultiplexer multiplexer)
     {
         this.multiplexer = multiplexer;
     }
 
-    public void Write(LeftRightDiff Lrd)
+    public async Task Write(LeftRightDiff Lrd)
     {
-        if (multiplexer == null)
+        if (multiplexer == null || string.IsNullOrEmpty(Lrd.ID))
         {
-            return ;
+             await Task.CompletedTask;
+             return;
         }
         var database = multiplexer.GetDatabase(1);
-        var lrd1 = ReadLRD(Lrd.ID);
+        var lrd1 = await ReadLRD(Lrd.ID);
         var left = " ";
         var right = " ";
         if (Lrd.Left != " ")
@@ -44,17 +45,22 @@ public class DataService : IDataService
         {
             right = lrd1.Right;
         }
-        database.HashSet(Lrd.ID, new HashEntry[] { new HashEntry("Left", left), new HashEntry("Right", right) });     
+        await database.HashSetAsync(Lrd.ID, new HashEntry[] { new HashEntry("Left", left), new HashEntry("Right", right) });
     }
-    public LeftRightDiff? ReadLRD(string Id)
+    public async Task<LeftRightDiff?> ReadLRD(string Id)
     {
         var database = multiplexer.GetDatabase(1);
-        if ( database.KeyExists(Id)){
-        var retreivedLeft = database.HashGetAll(Id)[0].Value;
-        var retreivedRight = database.HashGetAll(Id)[1].Value;
-        return new LeftRightDiff { ID = Id,
-          Left = retreivedLeft
-        ,Right = retreivedRight };
+        if (database.KeyExists(Id))
+        {
+            var retreived = await database.HashGetAllAsync(Id);
+            var retreivedLeft = retreived[0].Value;
+            var retreivedRight = retreived[1].Value;
+            return new LeftRightDiff
+            {
+                ID = Id,
+                Left = retreivedLeft,
+                Right = retreivedRight
+            };
         }
         return null;
     }

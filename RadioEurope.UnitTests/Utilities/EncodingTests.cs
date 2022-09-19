@@ -13,7 +13,7 @@ public class EncodingTests
     [InlineData("{\"input\":\"testValue\"}", "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9")]
     [InlineData("some value", "c29tZSB2YWx1ZQ==")]
 
-    public async Task Encoder_Should_CorrectlyEncode(string input,string expected)
+    public void Encoder_Should_CorrectlyEncode(string input,string expected)
     {
            // Arrange
  
@@ -28,7 +28,7 @@ public class EncodingTests
     [InlineData( "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9","{\"input\":\"testValue\"}")]
     [InlineData( "c29tZSB2YWx1ZQ==","some value")]
 
-    public async Task Decoder_Should_CorrectlyDecode(string input,string expected)
+    public void Decoder_Should_CorrectlyDecode(string input,string expected)
     {
            // Arrange
  

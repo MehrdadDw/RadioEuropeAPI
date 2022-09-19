@@ -5,8 +5,8 @@ namespace RadioEurope.API.Services;
 public interface IDiffService
 
 {
-    LeftRightDiff RetrieveLRD(string ID);
-    CalculateResult CalculateDiff(string ID);
+    Task<LeftRightDiff?> RetrieveLRD(string ID);
+    Task<CalculateResult> CalculateDiff(string ID);
 }
 
 public class DiffService : IDiffService
@@ -18,14 +18,14 @@ public class DiffService : IDiffService
         _DataService = DataService;
 
     }
-    public LeftRightDiff RetrieveLRD(string ID)
+    public async Task<LeftRightDiff?> RetrieveLRD(string ID)
     {
-        return _DataService.ReadLRD(ID);
+        return await _DataService.ReadLRD(ID);
     }
-    public CalculateResult CalculateDiff(string ID)
+    public async Task<CalculateResult> CalculateDiff(string ID)
     {
         var result = new List<OffsetLength>();
-        var LRD=RetrieveLRD(ID);
+        var LRD=await RetrieveLRD(ID);
         //todo not found
         if (LRD==null){
         return new CalculateResult{ Message=DiffMessage.KeyNotFound,Data= result};
@@ -33,7 +33,7 @@ public class DiffService : IDiffService
         if (LRD.Left==LRD.Right){
             return new CalculateResult{ Message= DiffMessage.Equal,Data= result};
         }
-        if (LRD.Left.Length!=LRD.Right.Length){
+        if (LRD.Left==null || LRD.Right==null || LRD.Left.Length!=LRD.Right.Length){
             return new CalculateResult{ Message= DiffMessage.LengthsNotEqual,Data= result};
         }
         var offset = 0;
