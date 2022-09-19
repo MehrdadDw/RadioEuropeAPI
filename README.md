@@ -3,9 +3,9 @@
 
 This is a .NET Solution containing a 3 projects:
 
-1 -  API Project
-2 -  API UnitTests Project 
-3 -  Test Client for the API end points
+ -  API Project
+ -  API UnitTests Project 
+ -  Test Client for the API end points
 
 
 
