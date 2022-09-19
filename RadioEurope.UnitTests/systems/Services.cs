@@ -33,6 +33,61 @@ public class Services
 		}
 		Assert.Equal(answer.Length,DiffResult.Data.Count);
     }
+
+    [Fact]
+    public void DiffService_Should_Detect_Equal()
+    {
+        //Arrange
+        IConnectionMultiplexer multiplexer = null;
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        .Returns(new LeftRightDiff { Left = "value1", Right = "value1", ID = "id1" });
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
+        mockDiffService.CallBase = true;
+        //Act
+        var DiffResult = mockDiffService.Object.CalculateDiff("id1");
+
+        //Assert
+		Assert.Equal(DiffResult.Message,DiffMessage.Equal);
+    }
+
+    [Fact]
+    public void DiffService_Should_Detect_SizeDiff()
+    {
+        //Arrange
+        IConnectionMultiplexer multiplexer = null;
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        .Returns(new LeftRightDiff { Left = "value", Right = "valuevalue", ID = "id1" });
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
+        mockDiffService.CallBase = true;
+        //Act
+        var DiffResult = mockDiffService.Object.CalculateDiff("id1");
+
+        //Assert		
+		Assert.Equal(DiffResult.Message,DiffMessage.LengthsNotEqual);
+    }
+
+    [Fact]
+    public void DiffService_Should_Detect_NofFound()
+    {
+        //Arrange
+        IConnectionMultiplexer multiplexer = null;
+        var mockDataService = new Mock<DataService>(multiplexer).As<IDataService>();
+        mockDataService.CallBase = true;
+        mockDataService.Setup(s => s.ReadLRD(It.IsAny<string>()))
+        .Returns((LeftRightDiff)null);
+        var mockDiffService = new Mock<DiffService>(mockDataService.Object).As<IDiffService>();
+        mockDiffService.CallBase = true;
+        //Act
+        var DiffResult = mockDiffService.Object.CalculateDiff("id1");
+
+        //Assert		
+		Assert.Equal(DiffResult.Message,DiffMessage.KeyNotFound);
+    }
+
     [Fact]
     public void DiffService_Should_Return_Equal()
     {

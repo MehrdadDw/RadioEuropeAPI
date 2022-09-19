@@ -66,7 +66,7 @@ class Program
     }
     static void send_req(HttpClient httpClient,string? host, string ID, string data = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9", string data2 = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9")
     {
-Console.WriteLine( $"http://{host}/v1/diff/{ID}/left");
+        Console.WriteLine( $"http://{host}/v1/diff/{ID}/left");
         using (var request = new HttpRequestMessage(new HttpMethod("POST"), $"http://{host}/v1/diff/{ID}/left"))
         {
             request.Headers.TryAddWithoutValidation("Content-Type", "application/custom");
