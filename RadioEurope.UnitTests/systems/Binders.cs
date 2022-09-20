@@ -37,7 +37,7 @@ public class Binders
             await binder.BindModelAsync(bindingContext);
 
             //--- assert
-            Assert.NotNull(bindingContext.Result);
+            Assert.NotSame(null,bindingContext.Result);
             Assert.True(bindingContext.Result.IsModelSet);
     }
     [Theory]
