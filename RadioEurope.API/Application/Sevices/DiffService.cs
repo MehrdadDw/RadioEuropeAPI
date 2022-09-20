@@ -1,13 +1,8 @@
-using StackExchange.Redis;
 using RadioEurope.API.Models;
 using RadioEurope.API.Models.Enums;
-namespace RadioEurope.API.Services;
-public interface IDiffService
+using RadioEurope.API.Application.Interfaces;
+namespace RadioEurope.API.Application.Services;
 
-{
-    Task<LeftRightDiff?> RetrieveLRD(string ID);
-    Task<CalculateResult> CalculateDiff(string ID);
-}
 
 public class DiffService : IDiffService
 {

@@ -1,5 +1,7 @@
-using RadioEurope.API.Services;
+using RadioEurope.API.Application.Services;
 using StackExchange.Redis;
+using RadioEurope.API.Application.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureServices(builder.Services);

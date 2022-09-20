@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using RadioEurope.API.Services;
+using RadioEurope.API.Application.Interfaces;
 using RadioEurope.API.Binders;
 using RadioEurope.API.Models;
 using RadioEurope.API.Models.Enums;
@@ -32,7 +32,7 @@ public class DiffController : ControllerBase
     {
         try
         {
-            await _DataService.Write(new LeftRightDiff { Left = input, Right = " ", ID = ID });
+            await _DataService.Write(new LeftRightDiff { Left = input, Right = "", ID = ID });
             return Ok();
         }
         catch (Exception ex)
@@ -55,7 +55,7 @@ public class DiffController : ControllerBase
     {
         try
         {
-            await _DataService.Write(new LeftRightDiff { Left = " ", Right = input, ID = ID });
+            await _DataService.Write(new LeftRightDiff { Left = "", Right = input, ID = ID });
             return Ok();
         }
         catch (Exception ex)

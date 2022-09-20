@@ -1,5 +1,6 @@
 using Moq;
-using RadioEurope.API.Services;
+using RadioEurope.API.Application.Services;
+using RadioEurope.API.Application.Interfaces;
 using RadioEurope.API.Models;
 using RadioEurope.API.Models.Enums;
 using StackExchange.Redis;

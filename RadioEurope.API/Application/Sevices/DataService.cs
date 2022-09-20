@@ -1,12 +1,8 @@
 using StackExchange.Redis;
 using RadioEurope.API.Models;
-namespace RadioEurope.API.Services;
-public interface IDataService
+using RadioEurope.API.Application.Interfaces;
+namespace RadioEurope.API.Application.Services;
 
-{
-    Task Write(LeftRightDiff LRD);
-    Task<LeftRightDiff?> ReadLRD(string ID);
-}
 
 public class DataService : IDataService
 {
@@ -26,9 +22,9 @@ public class DataService : IDataService
         }
         var database = multiplexer.GetDatabase(1);
         var lrd1 = await ReadLRD(Lrd.ID);
-        var left = " ";
-        var right = " ";
-        if (Lrd.Left != " ")
+        var left = "";
+        var right = "";
+        if (!string.IsNullOrEmpty( Lrd.Left))
         {
             left = Lrd.Left;
         }
@@ -37,7 +33,7 @@ public class DataService : IDataService
             left = lrd1.Left;
         }
 
-        if (Lrd.Right != " ")
+        if (!string.IsNullOrEmpty( Lrd.Right))
         {
             right = Lrd.Right;
         }
