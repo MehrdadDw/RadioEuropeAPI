@@ -73,20 +73,29 @@ Result=[(2,2),(6,1)]
 ```
 The result means starting from `second` character with the length of `2` we have first difference. the second difference starts at `6th` position and its length is `1`.
 
+
 ### System Design
 
 #### Matching IDs
-To calculate the differences, first of all we need a way to wire left and right with each other, for this the project uses `Redis` as data store and benefits from its fast on memory architecture. 
+To calculate the differences, first of all, we need a way to wire left and right with each other, for this the project uses `Redis` as a data store and benefits from its fast memory architecture. 
 
-The difference calculation itself depending on the length of strings can be time consuming but since there is no assumption about the length there is not further optimization considered in this solution.
+The difference calculation itself depending on the length of strings can be time-consuming but since there is no assumption about the length there is no further optimization considered in this solution.
 
 #### on-Demand Calculation
-The difference would be calculated on demand, meaning for same `ID` the calculation could happen multiple times, which also can be enhanced by storing the result for next uses that due to the more complicated solution considering rewrites and recalculation in case of overwrite is not implemented.
+The difference would be calculated on demand, meaning for the same `ID` the calculation could happen multiple times, which also can be enhanced by storing the result for next uses due to the more complicated solution considering rewrites and recalculation when overwriting is not implemented.
 
 
 
 #### Time Complexity
 The time complexity of implemented diff calculation is of order `O(n)` and is fast.
+
+### Limitations of the solution
+
+#### Repeating Requests
+If the call for diff for a certain ID occured  multiple time, this solution recalculates the diff over and over, hence, the performance can be improved more by storing first calculation result.
+#### Long Strings
+If length of strings are too big, storing them in case of equality or difference size is not needed at all, therefore it could be improved by only storing those conditions instead of two big strings. This behaviour currently causes more space complexity of solution.
+
 
 
 ### Tests
@@ -104,12 +113,12 @@ To increase the pressure of test either we can run `multiple instances` of the t
 #### Asynchronous Calculation
 
 In a real world scenario, the API users could be 
-numerous, and the diff request can happen not imediately, in this situation we can facilitate an `asynchronous solution` using message queues such as `RabbitMQ` to make the calculation happen constantly even when there is no demand and by storing the results we can increase the `CPU efficiency` by decreasing the `idle time`. However, this solution needs some assumptions and overwriting should be taken into account.
+numerous, and the diff request can happen not immediately, in this situation we can facilitate an `asynchronous solution` using message queues such as `RabbitMQ` to make the calculation happen constantly even when there is no demand and by storing the results we can increase the `CPU efficiency` by decreasing the `idle time`. However, this solution needs some assumptions and overwriting could be taken into account.
 
-This way, after getting both left and right values the calculation starts for future use, no matter wether there already is a demand for the result or not.
+This way, after getting both left and right values the calculation starts for future use, no matter whether there already is a demand for the result or not.
 
 #### Concurrent Calculation
 
-In case of `very long` strings, we can also exploit the power of concurrent calculations using threads/tasks, such that each thread/task calculates the difference of handful amount of characters.
+In the case of `very long` strings, we can also exploit the power of concurrent calculations using threads/tasks, such that each thread/task calculates the difference of a handful amount of characters.
 
 
