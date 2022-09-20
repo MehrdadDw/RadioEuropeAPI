@@ -10,7 +10,7 @@ class Program
 {
     static async Task<int> Main(string[] args)
     {
-        var numberOption = new Option<int?>(
+        var numberOption = new Option<int>(
             name: "--number",
             description: "The number of calling the api"
 
@@ -27,18 +27,19 @@ class Program
 
         rootCommand.SetHandler((number, host) =>
             {
-                ExecuteTests(number!, host!);
+                ExecuteTests(number, host!);
             },
             numberOption, hostOption);
 
         return await rootCommand.InvokeAsync(args);
     }
 
-    static void ExecuteTests(int? number = 2, string? host = "127.0.0.1:8083")
+    static void ExecuteTests(int number = 2, string? host = "127.0.0.1:8083")
     {
         var timer = new Stopwatch();
         var httpClient = new HttpClient();
         Random rnd = new Random();
+        var success_counter=0;
         for (int i = 0; i < number; i++)
         {
             Console.WriteLine($"---------------------------");
@@ -52,7 +53,10 @@ class Program
             var ID = GetRandomString(20);
             Console.WriteLine($"ID = \"{ID}\"");
             timer.Start();
-            send_req(httpClient,host, ID, encoded_data.Item1, encoded_data.Item2);
+            var result=send_req(httpClient,host, ID, encoded_data.Item1, encoded_data.Item2);
+            if (result){
+                success_counter++;
+            }
             timer.Stop();
 
         }
@@ -60,11 +64,12 @@ class Program
         Console.WriteLine($"-----------------------------------------------");
         Console.WriteLine($"---------------------Results-------------------");
         Console.WriteLine($"-----------------------------------------------");
-        Console.WriteLine($"took {timer.ElapsedMilliseconds / number} milliseconds per left+right+diff API calls.");
+        Console.WriteLine($"took {timer.ElapsedMilliseconds / number} milliseconds per left+right+diff {number} API calls.");
+        Console.WriteLine($"success ratio: {Math.Round((100.0d*(double)success_counter/(double)number),2)}%");
         Console.WriteLine($"{timer.ElapsedMilliseconds} milliseconds total reqs");
 
     }
-    static void send_req(HttpClient httpClient,string? host, string ID, string data = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9", string data2 = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9")
+    static bool send_req(HttpClient httpClient,string? host, string ID, string data = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9", string data2 = "eyJpbnB1dCI6InRlc3RWYWx1ZSJ9")
     {
         Console.WriteLine( $"http://{host}/v1/diff/{ID}/left");
         using (var request = new HttpRequestMessage(new HttpMethod("POST"), $"http://{host}/v1/diff/{ID}/left"))
@@ -86,6 +91,7 @@ class Program
         Console.WriteLine(":::Diff API Result:::");
         var diffResult=httpClient.GetStringAsync($"http://{host}/v1/diff/{ID}").Result;
         Console.WriteLine(diffResult);
+        return (diffResult.Length>0);
 
 
     }
