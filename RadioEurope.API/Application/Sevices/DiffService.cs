@@ -39,6 +39,7 @@ public class DiffService : IDiffService
             {
                 if (lenght == 0)
                 {
+                    //stating new diff
                     offset = i;
                 }
                 lenght++;
@@ -47,16 +48,18 @@ public class DiffService : IDiffService
             {
                 if (lenght != 0)
                 {
+                    //end of previous diff, therefore the previous diff is finalized
                     result.Add(new OffsetLength { offset = offset, length = lenght });
                     lenght = 0;
                 }
             }
 
         }
-            if (lenght != 0)
-            {
-                result.Add(new OffsetLength { offset = offset, length = lenght });
-            }
+        //check for unfinalized last diff 
+        if (lenght != 0)
+        {
+            result.Add(new OffsetLength { offset = offset, length = lenght });
+        }
         return new CalculateResult{ Message= DiffMessage.Success,Data= result};
     }
 

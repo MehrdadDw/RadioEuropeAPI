@@ -11,7 +11,7 @@ public class CustomBinder : IModelBinder
 
  string model;
    string bodyAsText = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
-        
+        //Dcoding json and then retrieving the value
         var jsonString = bodyAsText.DecodeBase64();
         model=JsonSerializer.Deserialize<Input>(jsonString)?.input ?? "";
         bindingContext.Result = ModelBindingResult.Success(model);

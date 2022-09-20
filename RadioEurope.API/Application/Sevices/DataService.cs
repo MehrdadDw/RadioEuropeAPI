@@ -28,6 +28,7 @@ public class DataService : IDataService
         {
             left = Lrd.Left;
         }
+        //the left value of input was empty then we maintain old value
         else if (!string.IsNullOrEmpty(lrd1?.Left))
         {
             left = lrd1.Left;
@@ -37,6 +38,7 @@ public class DataService : IDataService
         {
             right = Lrd.Right;
         }
+        //the right value of input was empty then we maintain old value
         else if (!string.IsNullOrEmpty(lrd1?.Right))
         {
             right = lrd1.Right;

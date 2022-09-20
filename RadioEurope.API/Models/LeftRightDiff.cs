@@ -1,5 +1,7 @@
 namespace RadioEurope.API.Models;
-
+/// <summary>
+/// Class <c>LeftRightDiff</c> model of data structure to be stored in sata store (redis).
+/// </summary>
 public class LeftRightDiff
 {
     public string? ID { get; set; }
