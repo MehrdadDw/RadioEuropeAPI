@@ -20,7 +20,7 @@ To build and start both projects simply run the following command:
 docker-compose build
 docker-compose up
 ```
-During this proccess the tests (around 25) and build would be done and then by startinf the containers, server would be listening to port number: 8083. Therefore you can navigate to swagger page: http://localhost:8083/swagger or http://127.0.0.1:8083/swagger
+During this process, the tests (around 25) and build would be done and then by starting the containers, server would be listening to port number: 8083. Therefore you can navigate to the swagger page: http://localhost:8083/swagger or http://127.0.0.1:8083/swagger
 
 and to stop it you can use:
 ```bash
